@@ -10,7 +10,9 @@
     "lint:prettier": "prettier --check \"src/**/*.ts\" \"src/**/*.html\"",
     "ng": "ng",
     "start": "ng serve",
-    "test": "ng test",
+    "test": "ng test --watch=false",
+    "test:ci": "ng test --watch=false --code-coverage",
+    "test:watch": "ng test",
     "watch": "ng build --watch --configuration development"
   },
   "prettier": {
