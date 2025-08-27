@@ -1,6 +1,7 @@
+import { provideHttpClient } from '@angular/common/http';
 import { TestBed } from '@angular/core/testing';
-import { AppComponent, Environment } from './App.component';
 import { DiagnosticsService } from '../../app/diagnostics.service';
+import { AppComponent, Environment } from './App.component';
 
 class MockDiagnosticsService {
   fetchDiagnostics() {
@@ -18,6 +19,7 @@ describe('AppComponent', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [
+        provideHttpClient(),
         { provide: DiagnosticsService, useClass: MockDiagnosticsService },
       ],
     });

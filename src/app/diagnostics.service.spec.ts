@@ -1,4 +1,5 @@
 import { TestBed } from '@angular/core/testing';
+import { provideHttpClient } from '@angular/common/http';
 import {
   provideHttpClientTesting,
   HttpTestingController,
@@ -11,7 +12,11 @@ describe('DiagnosticsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      providers: [DiagnosticsService, provideHttpClientTesting()],
+      providers: [
+        DiagnosticsService,
+        provideHttpClient(),
+        provideHttpClientTesting(),
+      ],
     });
     service = TestBed.inject(DiagnosticsService);
     httpMock = TestBed.inject(HttpTestingController);
