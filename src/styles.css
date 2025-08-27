@@ -3,6 +3,8 @@
 html,
 body {
   height: 100%;
+  background: var(--mat-sys-background);
+  color: var(--mat-sys-on-background);
 }
 
 body {
