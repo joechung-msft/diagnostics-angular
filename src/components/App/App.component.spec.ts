@@ -20,12 +20,8 @@ describe('AppComponent', () => {
 
   it('setEnvironment updates environment and resets extension', async () => {
     component.extension = { extensionName: 'foo' };
-    await component.setEnvironment(
-      'https://hosting.azureportal.usgovcloudapi.net/api/diagnostics' as any,
-    );
-    expect(component.environment).toBe(
-      'https://hosting.azureportal.usgovcloudapi.net/api/diagnostics',
-    );
+    await component.setEnvironment(Environment.Fairfax);
+    expect(component.environment).toBe(Environment.Fairfax);
     expect(component.extension).toBeUndefined();
   });
 

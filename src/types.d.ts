@@ -22,12 +22,12 @@ interface ExtensionError {
 type Extension = ExtensionInfo | ExtensionError;
 
 // Remove Fluent UI 8 dependency and define KeyedNavLink locally
-type KeyedNavLink = {
+interface KeyedNavLink {
   key: string;
   name: string;
   url?: string;
   [prop: string]: unknown;
-};
+}
 
 interface KeyValuePair<TValue> {
   key: string;
