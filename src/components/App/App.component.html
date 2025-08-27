@@ -1,0 +1,59 @@
+<div class="flexbox">
+  <mat-toolbar>
+    <mat-menu #envMenu="matMenu">
+      @for (env of environments; track env) {
+        <button mat-menu-item (click)="env.onClick()">
+          <mat-icon>
+            {{ env.selected() ? 'check' : '' }}
+          </mat-icon>
+          {{ env.text }}
+        </button>
+      }
+    </mat-menu>
+    <button mat-button [matMenuTriggerFor]="envMenu">
+      {{ environmentName }}
+    </button>
+    @if (showPaasServerless) {
+      <button mat-button (click)="selectExtension('paasserverless')">
+        paasserverless
+      </button>
+    }
+    <button mat-button (click)="selectExtension('websites')">websites</button>
+  </mat-toolbar>
+
+  <mat-tab-group mat-stretch-tabs="false" [(selectedIndex)]="selectedIndex">
+    <mat-tab label="Extensions"></mat-tab>
+    <mat-tab label="Build Information"></mat-tab>
+    <mat-tab label="Server Information"></mat-tab>
+  </mat-tab-group>
+
+  @if (selectedIndex === 0) {
+    <div class="tab-panel">
+      <div class="stack">
+        <app-extensions
+          [extensions]="diagnostics?.extensions ?? {}"
+          (linkClick)="handleLinkClick($event.item)"
+        />
+        @if (extension) {
+          <app-extension
+            [config]="extension.config"
+            [extensionName]="extension.extensionName"
+            [stageDefinition]="extension.stageDefinition"
+          />
+        }
+      </div>
+    </div>
+  } @else if (selectedIndex === 1) {
+    <div class="tab-panel">
+      @if (diagnostics?.buildInfo) {
+        <app-build-info [buildVersion]="diagnostics?.buildInfo.buildVersion" />
+      }
+    </div>
+  } @else if (selectedIndex === 2) {
+    <div class="tab-panel">
+      @if (diagnostics?.serverInfo) {
+        <app-server-info [serverInfo]="diagnostics?.serverInfo" />
+      }
+    </div>
+  }
+</div>

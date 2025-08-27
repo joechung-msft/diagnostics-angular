@@ -1,0 +1,24 @@
+:host {
+  display: flex;
+  flex-direction: column;
+  flex-wrap: nowrap;
+  gap: 0.5rem;
+  max-height: max-content;
+  overflow-y: auto;
+  padding: 0.25rem;
+}
+
+.extension-nav-button {
+  box-sizing: border-box;
+  display: flex;
+  justify-content: flex-start;
+  min-height: max-content;
+  text-align: left;
+}
+
+/* Firefox cannot use max-content: https://caniuse.com/?search=max-content */
+@media all and (min-height: -moz-available) {
+  .extension-nav-button {
+    min-height: -moz-available;
+  }
+}

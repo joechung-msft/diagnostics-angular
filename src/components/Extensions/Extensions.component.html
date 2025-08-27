@@ -1,0 +1,11 @@
+<nav aria-label="Extensions">
+  @for (link of links; track link.key) {
+    <button
+      mat-button
+      (click)="handleClick($event, link)"
+      class="extension-nav-button"
+    >
+      {{ link.name }}
+    </button>
+  }
+</nav>

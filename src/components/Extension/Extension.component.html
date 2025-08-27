@@ -1,0 +1,9 @@
+<div class="extension-root grow">
+  <h2>{{ extensionName }}</h2>
+  @if (hasConfig) {
+    <app-configuration [config]="config" />
+  }
+  @if (hasStageDefinition) {
+    <app-stage-definition [stageDefinition]="stageDefinition" />
+  }
+</div>
