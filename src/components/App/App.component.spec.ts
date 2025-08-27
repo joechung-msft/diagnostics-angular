@@ -1,12 +1,27 @@
+import { TestBed } from '@angular/core/testing';
 import { AppComponent, Environment } from './App.component';
+import { DiagnosticsService } from '../../app/diagnostics.service';
+
+class MockDiagnosticsService {
+  fetchDiagnostics() {
+    return Promise.resolve({
+      extensions: {},
+      buildInfo: {},
+      serverInfo: {},
+    });
+  }
+}
 
 describe('AppComponent', () => {
   let component: AppComponent;
 
   beforeEach(() => {
-    component = new AppComponent();
-    // Prevent actual fetch
-    spyOn(component, 'fetchDiagnostics').and.stub();
+    TestBed.configureTestingModule({
+      providers: [
+        { provide: DiagnosticsService, useClass: MockDiagnosticsService },
+      ],
+    });
+    component = TestBed.createComponent(AppComponent).componentInstance;
   });
 
   it('environmentName returns correct string', () => {

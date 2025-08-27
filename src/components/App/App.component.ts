@@ -1,10 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, inject, OnInit } from '@angular/core';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatToolbarModule } from '@angular/material/toolbar';
+import { DiagnosticsService } from '../../app/diagnostics.service';
 import { isExtensionInfo } from '../../utils/index';
 import { BuildInfoComponent } from '../BuildInfo/BuildInfo.component';
 import { ExtensionComponent } from '../Extension/Extension.component';
@@ -40,6 +41,8 @@ export class AppComponent implements OnInit {
   environment: Environment = Environment.Public;
   selectedIndex = 0;
 
+  private diagnosticsService = inject(DiagnosticsService);
+
   get environmentName(): string {
     switch (this.environment) {
       case Environment.Public:
@@ -57,7 +60,6 @@ export class AppComponent implements OnInit {
       text: 'Public Cloud',
       selected: () => this.environment === Environment.Public,
       onClick: () => {
-        console.log('Switching to Public Cloud');
         this.setEnvironment(Environment.Public);
       },
     },
@@ -66,7 +68,6 @@ export class AppComponent implements OnInit {
       text: 'Fairfax',
       selected: () => this.environment === Environment.Fairfax,
       onClick: () => {
-        console.log('Switching to Fairfax');
         this.setEnvironment(Environment.Fairfax);
       },
     },
@@ -75,7 +76,6 @@ export class AppComponent implements OnInit {
       text: 'Mooncake',
       selected: () => this.environment === Environment.Mooncake,
       onClick: () => {
-        console.log('Switching to Mooncake');
         this.setEnvironment(Environment.Mooncake);
       },
     },
@@ -86,18 +86,17 @@ export class AppComponent implements OnInit {
   }
 
   async ngOnInit() {
-    await this.fetchDiagnostics();
-  }
-
-  async fetchDiagnostics() {
-    const response = await fetch(this.environment);
-    this.diagnostics = await response.json();
+    this.diagnostics = await this.diagnosticsService.fetchDiagnostics(
+      this.environment,
+    );
   }
 
   async setEnvironment(env: Environment) {
     this.environment = env;
     this.extension = undefined;
-    await this.fetchDiagnostics();
+    this.diagnostics = await this.diagnosticsService.fetchDiagnostics(
+      this.environment,
+    );
   }
 
   handleLinkClick(item?: KeyedNavLink) {
