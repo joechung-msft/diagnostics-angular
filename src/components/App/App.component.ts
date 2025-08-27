@@ -11,7 +11,7 @@ import { ExtensionComponent } from '../Extension/Extension.component';
 import { ExtensionsComponent } from '../Extensions/Extensions.component';
 import { ServerInfoComponent } from '../ServerInfo/ServerInfo.component';
 
-enum Environment {
+export enum Environment {
   Public = 'https://hosting.portal.azure.net/api/diagnostics',
   Fairfax = 'https://hosting.azureportal.usgovcloudapi.net/api/diagnostics',
   Mooncake = 'https://hosting.azureportal.chinacloudapi.cn/api/diagnostics',

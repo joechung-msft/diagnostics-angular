@@ -15,7 +15,3 @@ export function toNavLink({ extensionName }: ExtensionInfo): KeyedNavLink {
     url: '',
   };
 }
-
-export function when<T>(condition: boolean, ...args: T[]): T[] {
-  return condition ? args : [];
-}
