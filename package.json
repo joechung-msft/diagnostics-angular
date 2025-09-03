@@ -6,7 +6,7 @@
     "build:production": "ng build --configuration production",
     "format": "prettier --write \"src/**/*.ts\" \"src/**/*.html\"",
     "lint": "npm-run-all lint:*",
-    "lint:eslint": "eslint \"src/**/*.ts\" \"src/**/*.html\"",
+    "lint:eslint": "eslint --concurrency=auto \"src/**/*.ts\" \"src/**/*.html\"",
     "lint:prettier": "prettier --check \"src/**/*.ts\" \"src/**/*.html\"",
     "ng": "ng",
     "start": "ng serve",
