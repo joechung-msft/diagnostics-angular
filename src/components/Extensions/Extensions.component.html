@@ -1,11 +1,12 @@
-<nav aria-label="Extensions">
-  @for (link of links; track link.key) {
+<cdk-virtual-scroll-viewport itemSize="40" class="extension-viewport">
+  <nav aria-label="Extensions">
     <button
+      *cdkVirtualFor="let link of links; trackBy: trackByFn"
       mat-button
       (click)="handleClick($event, link)"
       class="extension-nav-button"
     >
       {{ link.name }}
     </button>
-  }
-</nav>
+  </nav>
+</cdk-virtual-scroll-viewport>
